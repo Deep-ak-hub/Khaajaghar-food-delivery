@@ -1,0 +1,32 @@
+const router = require("express").Router()
+
+const authRouter = require("../routes/auth.router")
+const bannerRouter = require("../routes/banner.router")
+const categoryRouter = require("../routes/category.router")
+const deliveryRouter = require("../routes/delivery.router")
+const feedbackRouter = require("../routes/feedback.router")
+const frontRouter = require("../routes/front.router")
+const menuRouter = require("../routes/menu.router")
+const offerRouter = require("../routes/offer.router")
+const orderDetailsRouter = require("../routes/order-details.router")
+const orderRouter = require("../routes/order.router")
+const restaurantRouter = require("../routes/restaurant.router")
+const transactionRouter = require("../routes/transaction.router")
+const userRouter = require("../routes/user.router")
+
+
+router.use("/auth", authRouter)
+router.use("/banner", bannerRouter)
+router.use("/category", categoryRouter)
+router.use("/delivery", deliveryRouter)
+router.use("/feedback", feedbackRouter)
+router.use("/front", frontRouter)
+router.use("/menu", menuRouter)
+router.use("/offer", offerRouter)
+router.use("/order-details", orderDetailsRouter)
+router.use("/order", orderRouter)
+router.use("/restaurant", restaurantRouter)
+router.use("/transaction", transactionRouter)
+router.use("/user", userRouter)
+
+module.exports = router

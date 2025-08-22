@@ -1,8 +1,9 @@
 class AuthController {
   registerUser = (req, res, next) => {
     const data = req.body;
+    const file = req.file
     res.json({
-      data: { data },
+      data: { data, file },
       message: "Your account has been registered successfully",
       status: "OK",
     });
