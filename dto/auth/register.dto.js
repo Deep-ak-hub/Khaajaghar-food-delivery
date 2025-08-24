@@ -40,7 +40,7 @@ const RegisterDTO = Joi.object({
 
   confirmPassword: Joi.string().valid(Joi.ref("password")).required().messages({
     "any.only": "Password and Confirm Password should match",
-    "any.required": "Password confirmation is required"
+    "any.required": "Password confirmation is required",
   }),
 
   role: Joi.string().regex(RoleExp).default(UserRole.CUSTOMER),
@@ -55,6 +55,8 @@ const RegisterDTO = Joi.object({
     .allow(null, "")
     .optional()
     .default(null),
+
+  image: Joi.string().allow(null, "").optional().default(null),
 }).options({
   abortEarly: false,
 });

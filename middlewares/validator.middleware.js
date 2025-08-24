@@ -6,7 +6,7 @@ const validateBodyData = (schema) => {
         next({
           code: 422,
           message: "Empty Payload",
-          status: "AYLOAD_EMPTY_ERR",
+          status: "PAYLOAD_EMPTY_ERR",
         });
       }
 

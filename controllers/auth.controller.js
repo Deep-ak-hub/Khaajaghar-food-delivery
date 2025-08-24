@@ -1,12 +1,37 @@
+const { cloudinaryServices } = require("../services/cloudinary.services");
+const createDate = require("../utils/createDate");
+const { randomStringGenerator } = require("../utils/randomStringGenerator");
+const bcrypt = require("bcryptjs");
+
 class AuthController {
-  registerUser = (req, res, next) => {
-    const data = req.body;
-    const file = req.file
-    res.json({
-      data: { data, file },
-      message: "Your account has been registered successfully",
-      status: "OK",
-    });
+  registerUser = async (req, res, next) => {
+    try {
+      const data = req.body;
+      const file = req.file;
+
+      data.image = await cloudinaryServices.singleFileUpload(
+        file.path,
+        "users/"
+      );
+
+      // const salt = bcrypt.genSaltSync(12)
+      // data.password = bcrypt.hashSync(data.password, salt)
+      data.password = bcrypt.hashSync(data.password, 12);
+
+      data.activationTOken = randomStringGenerator();
+
+      data.expiryTime = createDate(new Date(), 1);
+
+      data.status = "inactive";
+
+      res.json({
+        data: data,
+        message: "Your account has been registered successfully",
+        status: "OK",
+      });
+    } catch (exception) {
+      next(exception);
+    }
   };
 
   activateUserByToken = (req, res, next) => {
@@ -92,5 +117,5 @@ class AuthController {
   };
 }
 
-const authController = new AuthController()
-module.exports = authController
+const authController = new AuthController();
+module.exports = authController;

@@ -10,9 +10,10 @@ const { RegisterDTO } = require("../dto/auth/register.dto")
 const { resetPasswordDTO } = require("../dto/auth/reset-password.dto")
 const { UpdateProfileDTO } = require("../dto/auth/update-profile.dto")
 const loginCheck = require("../middlewares/auth.middleware")
+const uploader = require("../middlewares/uploader.middleware")
 const validateBodyData = require("../middlewares/validator.middleware")
 
-authRouter.post("/register", validateBodyData(RegisterDTO),authController.registerUser)
+authRouter.post("/register", validateBodyData(RegisterDTO), uploader().single('image') ,authController.registerUser)
 authRouter.post("/login", validateBodyData(LoginDTO), authController.userLogin)
 
 authRouter.post("/password/forget", validateBodyData(forgotPasswordDTO), authController.userForgetPassword)
