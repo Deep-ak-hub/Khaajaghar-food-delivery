@@ -27,7 +27,7 @@ class CloudinaryServices {
           aspect_ratio: "1.0",
           height: height,
           width: width,
-          crop: FileList,
+          crop: "fill",
         },
       ],
     });

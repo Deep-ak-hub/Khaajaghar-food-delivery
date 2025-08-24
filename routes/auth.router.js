@@ -1,6 +1,7 @@
 const authRouter = require("express").Router()
 
 const authController = require("../controllers/auth.controller")
+
 const { ChangePasswordDTO } = require("../dto/auth/change-password.dto")
 const { DeactivateAccountDTO } = require("../dto/auth/deactivate-account.dto")
 const { forgotPasswordDTO } = require("../dto/auth/forget-password.dto")
@@ -9,11 +10,12 @@ const { RefreshTokenDTO } = require("../dto/auth/refresh-token.dto")
 const { RegisterDTO } = require("../dto/auth/register.dto")
 const { resetPasswordDTO } = require("../dto/auth/reset-password.dto")
 const { UpdateProfileDTO } = require("../dto/auth/update-profile.dto")
+
 const loginCheck = require("../middlewares/auth.middleware")
 const uploader = require("../middlewares/uploader.middleware")
 const validateBodyData = require("../middlewares/validator.middleware")
 
-authRouter.post("/register", validateBodyData(RegisterDTO), uploader().single('image') ,authController.registerUser)
+authRouter.post("/register", uploader().single('image') , validateBodyData(RegisterDTO),authController.registerUser)
 authRouter.post("/login", validateBodyData(LoginDTO), authController.userLogin)
 
 authRouter.post("/password/forget", validateBodyData(forgotPasswordDTO), authController.userForgetPassword)
